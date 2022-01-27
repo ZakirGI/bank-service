@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Deposit;
-import com.example.demo.service.DepositService;
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
 
-public class DepositController {
+@RestController
+public class AccountController {
 	@Autowired
-	private DepositService depositService;
-	@PostMapping("/{id}/deposit")
+	private AccountService accountService;
+	
+	@PostMapping("/{id}/account")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	void addDeposit(@RequestBody @Valid Deposit deposit, @PathVariable("id") Integer id) {
-		depositService.addDeposit(deposit, id);
+	void addAccount(@RequestBody @Valid Account account, @PathVariable("id") Integer id) {
+		accountService.addAccount(account, id);
 	}
+	
 
 }
