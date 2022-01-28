@@ -1,9 +1,13 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,6 +40,12 @@ public class Account {
 	@Pattern(regexp = "[0-9]+(\\.[0-9][0-9]?)?")
 	@Range(min = 500)
 	private Double initalDep;
+	
+	@OneToOne(mappedBy = "account")
+	private Customer customer;
+	
+	@OneToMany(mappedBy = "account")
+	private List<Deposit> deposit;
 
 	public String getCustId() {
 		return custId;
