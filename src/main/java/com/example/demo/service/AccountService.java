@@ -18,11 +18,11 @@ public class AccountService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	public void addAccount(@Valid Account account, Integer id) {
-		Customer customer = customerRepository.findById(id).get();
-		Account acc = customer.getAccount();
-		
-		accountRepository.save(acc);
+	public void addAccount(@Valid Account account) {
+		Integer customerId = Integer.parseInt(account.getCustId());
+		Customer customer = customerRepository.findById(customerId).get();	
+		customer.setAccount(account);
+		accountRepository.save(account);
 		customerRepository.save(customer);
 		
 	}

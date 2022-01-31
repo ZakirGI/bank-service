@@ -3,9 +3,9 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Customer;
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Deposit;
-import com.example.demo.repository.CustomerRepository;
+import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.depositRepository;
 
 @Service
@@ -14,22 +14,19 @@ public class DepositService {
 	@Autowired
 	private depositRepository depositRepository;
 	@Autowired
-	private CustomerRepository customerRepository;
+	private AccountRepository accountRepository;
 	
-	public void addDeposit(Deposit deposit, Integer id) {
+	public void addDeposit(Deposit deposit) {
 		
-		Customer customer = customerRepository.findById(id).get();
+		Integer accountNumber = Integer.parseInt(deposit.getAccountnum());
+		Account account = accountRepository.findById(accountNumber).get();	
 		
-		Double initial_amount = customer.getDeposit().getAmount();
+		Double initial_amount = account.getInitalDep();
 		Double total_amount = initial_amount + deposit.getAmount();
 		
-		Deposit depositfinal = customer.getDeposit();
-		depositfinal.setAmount(total_amount);
-		
-		
-		depositRepository.save(depositfinal);
-		customer.setDeposit(depositfinal);
-		customerRepository.save(customer);
+		account.setInitalDep(total_amount);
+		account.getDeposits().add(deposit);
+		accountRepository.save(account);
 	}
 	
 }

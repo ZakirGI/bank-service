@@ -16,10 +16,10 @@ import com.example.demo.service.WithdrawService;
 public class WithdrawalController extends CustomerController{
 	@Autowired
 	private WithdrawService withdrawService;
-	@PostMapping("/{id}/withdraw")
+	@PostMapping("/withdraw")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	void makeWithdraw(@RequestBody @Valid Withdraw withdraw, @PathVariable("id") Integer id) {
-		withdrawService.makeWithdraw(withdraw, id);
+		withdrawService.makeWithdraw(withdraw);
 	}
 	
 }
