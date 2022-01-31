@@ -87,7 +87,7 @@ public class Customer {
 	private String email;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "account_id_ref", referencedColumnName = "accountId")
+	@JoinColumn(name = "account_id_ref", referencedColumnName = "accid")
 	private Account account;
 
 
